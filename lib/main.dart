@@ -35,10 +35,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'What is your favourite animal?',
-      'What is your favourite vehicle type?',
-      'What is your favourite vehicle football club?',
-      'What is your favourite colour?'
+      {
+        'questionText': 'What is your favourite color?',
+        'answers': ['red', 'blue', 'green']
+      },
+      {
+        'questionText': 'What is your favourite vehicle type?',
+        'answers': ['Volvo', 'Audi', 'Other']
+      },
+      {
+        'questionText': 'What is your favourite programming language?',
+        'answers': ['c++', 'python', 'dart']
+      }
     ];
 
     return MaterialApp(
@@ -46,17 +54,22 @@ class _MyAppState extends State<MyApp> {
       // Widget Tree:
       // Scaffold: it is will give a basic design and structure  to the app.
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('My first App.'),
-          ),
-          body: Column(
-            children: [
-              Question(questions[_questionIndex]),
-              Answer(_answerQuestion),
-              Answer(null),
-              Answer(() => {print("ASD")}),
-            ],
-          )),
+        appBar: AppBar(
+          backgroundColor: Colors.greenAccent,
+          title: Text('Quiz Application.'),
+        ),
+        body: Column(
+          children: [
+            Question(
+              questions[_questionIndex]['questionText'],
+            ),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
+          ],
+        ),
+      ),
     );
   }
 }

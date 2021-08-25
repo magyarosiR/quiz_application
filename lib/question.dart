@@ -14,7 +14,7 @@ class Question extends StatelessWidget {
           10), // EdgeInseats is a special type, all is a constructor.
       child: Text(
         questionText,
-        style: TextStyle(fontSize: 28, color: Colors.blueAccent),
+        style: TextStyle(fontSize: 28, color: Colors.black),
         textAlign: TextAlign.center,
       ),
     );

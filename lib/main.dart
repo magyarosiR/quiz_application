@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './question.dart';
 import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -24,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   // In Dart all of the underscored names are private
   var _questionIndex = 0;
 
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What is your favourite color?',
       'answers': ['red', 'blue', 'green']
@@ -43,7 +45,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print("We have more questions");
     } else {
       print("No more questions.");
@@ -57,26 +59,17 @@ class _MyAppState extends State<MyApp> {
       // Widget Tree:
       // Scaffold: it is will give a basic design and structure  to the app.
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.greenAccent,
-          title: Text('Quiz Application.'),
-        ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(
-                    questions[_questionIndex]['questionText'],
-                  ),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                ],
-              )
-            : Center(
-                child: Text("You did it!"),
-              ),
-      ),
+          appBar: AppBar(
+            backgroundColor: Colors.greenAccent,
+            title: Text('Quiz Application.'),
+          ),
+          body: _questionIndex < _questions.length
+              ? Quiz(
+                  answerQuestion: _answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: _questions,
+                )
+              : Result()),
     );
   }
 }

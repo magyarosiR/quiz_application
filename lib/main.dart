@@ -103,10 +103,18 @@ class _MyAppState extends State<MyApp> {
             title: Text('Quiz Application.'),
           ),
           body: _questionIndex < _questions.length
-              ? Quiz(
-                  answerQuestion: _answerQuestion,
-                  questionIndex: _questionIndex,
-                  questions: _questions,
+              ? Container(
+                  child: Quiz(
+                    answerQuestion: _answerQuestion,
+                    questionIndex: _questionIndex,
+                    questions: _questions,
+                  ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/blur.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 )
               : Result(_totalScore, _resetQuiz)),
     );

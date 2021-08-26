@@ -25,7 +25,11 @@ class Result extends StatelessWidget {
             style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
-          FlatButton(onPressed: resetQuiz, child: Text("Try again"))
+          OutlineButton(
+            onPressed: resetQuiz,
+            child: Text("Try again"),
+            textColor: Colors.greenAccent,
+          )
         ],
       ),
     );

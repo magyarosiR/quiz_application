@@ -25,31 +25,70 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // In Dart all of the underscored names are private
   var _questionIndex = 0;
+  var _totalScore = 0;
 
   final _questions = const [
     {
-      'questionText': 'What is your favourite color?',
-      'answers': ['red', 'blue', 'green']
+      'questionText': 'Which one is the first search engine in internet?',
+      'answers': [
+        {'text': 'Google', 'score': 0},
+        {'text': 'Archie', 'score': 1},
+        {'text': 'Altavista', 'score': 0},
+        {'text': 'WAIS', 'score': 0},
+      ]
     },
     {
-      'questionText': 'What is your favourite vehicle type?',
-      'answers': ['Volvo', 'Audi', 'Other']
+      'questionText':
+          'Which of the following programming language is used to create programs like applets?',
+      'answers': [
+        {'text': 'C', 'score': 0},
+        {'text': 'Python', 'score': 0},
+        {'text': 'Java', 'score': 1},
+      ]
     },
     {
-      'questionText': 'What is your favourite programming language?',
-      'answers': ['c++', 'python', 'dart']
+      'questionText': 'Which of the following is not an operating system?',
+      'answers': [
+        {'text': 'Flutter', 'score': 1},
+        {'text': 'Windows', 'score': 0},
+        {'text': 'Linux', 'score': 0},
+        {'text': 'macOS', 'score': 0},
+      ]
+    },
+    {
+      'questionText':
+          'Which of the following is not a database management software?',
+      'answers': [
+        {'text': 'MySQL', 'score': 0},
+        {'text': 'Oracle', 'score': 0},
+        {'text': 'Sybase', 'score': 0},
+        {'text': 'COBOL', 'score': 1},
+        {'text': 'MongoDB', 'score': 0},
+      ]
+    },
+    {
+      'questionText': '1024 bit is equal to how many byte',
+      'answers': [
+        {'text': '1 byte', 'score': 0},
+        {'text': '128 byte', 'score': 1},
+        {'text': '32 byte', 'score': 0},
+        {'text': '64 byte', 'score': 0},
+      ]
     }
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+    _totalScore = _totalScore + score;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    if (_questionIndex < _questions.length) {
-      print("We have more questions");
-    } else {
-      print("No more questions.");
-    }
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _totalScore = 0;
+      _questionIndex = 0;
+    });
   }
 
   @override
@@ -69,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                   questionIndex: _questionIndex,
                   questions: _questions,
                 )
-              : Result()),
+              : Result(_totalScore, _resetQuiz)),
     );
   }
 }
